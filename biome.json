@@ -10,7 +10,7 @@
 		}
 	},
 	"files": {
-		"include": ["./src"]
+		"include": ["./src/*"]
 	},
 	"javascript": {
 		"formatter": {
