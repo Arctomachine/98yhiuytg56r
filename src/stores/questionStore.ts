@@ -22,6 +22,7 @@ const useQuestionStore = create<QuestionStore>()((set) => ({
 		set((state) => ({
 			currentQuestionNumber: state.currentQuestionNumber + 1,
 			currentState: 'initial',
+			currentAnswer: undefined,
 		})),
 	currentAnswer: undefined,
 	setAnswer: (newAnswer: string) => set(() => ({ currentAnswer: newAnswer })),

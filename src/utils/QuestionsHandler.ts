@@ -21,8 +21,13 @@ export async function submitAnswer(questionNumber: number, answer: string) {
 
 	if (question.type === 'selectSingle') {
 		return {
-			correct: question.answerNumber === Number(answer),
 			correctAnswerNumber: question.answerNumber.toString(),
+		}
+	}
+
+	if (question.type === 'selectMultiple') {
+		return {
+			correctAnswerNumbers: question.answerNumbers.join(','),
 		}
 	}
 }

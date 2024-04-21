@@ -33,18 +33,18 @@ const questions: Question[] = [
 		],
 		answerNumber: 0,
 	},
-	// {
-	// 	type: 'selectMultiple',
-	// 	question: btoa(Date.now().toString()),
-	// 	options: [
-	// 		btoa(Math.random().toString()),
-	// 		btoa(Math.random().toString()),
-	// 		btoa(Math.random().toString()),
-	// 		btoa(Math.random().toString()),
-	// 		btoa(Math.random().toString()),
-	// 	],
-	// 	answerNumbers: [0,1],
-	// },
+	{
+		type: 'selectMultiple',
+		question: btoa(Date.now().toString()),
+		options: [
+			btoa(Math.random().toString()),
+			btoa(Math.random().toString()),
+			btoa(Math.random().toString()),
+			btoa(Math.random().toString()),
+			btoa(Math.random().toString()),
+		],
+		answerNumbers: [0, 1],
+	},
 	// {
 	// 	type: 'inputShort',
 	// 	question: btoa(Date.now().toString()),

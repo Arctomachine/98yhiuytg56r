@@ -8,7 +8,9 @@ export function AnswerMark({
 	index: number
 }) {
 	const answer = useQuestionStore((state) => state.currentAnswer)
-	if (Number(correctAnswer) === index) return <>✅</>
-	if (answer && Number(answer) === index) return <>❌</>
+	const correctAnswerArray = correctAnswer.split(',')
+
+	if (correctAnswerArray.includes(index.toString())) return <>✅</>
+	if (answer && answer.split(',').includes(index.toString())) return <>❌</>
 	return null
 }

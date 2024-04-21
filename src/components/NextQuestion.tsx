@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import useQuestionStore from '../stores/questionStore.ts'
 import { loadOneQuestion, submitAnswer } from '../utils/QuestionsHandler.ts'
 import { SingleOption } from './SingleOption.tsx'
+import { MultipleOptions } from './MultipleOptions.tsx'
 
 function NextQuestion({ questionNumber }: { questionNumber: number }) {
 	const currentState = useQuestionStore((state) => state.currentState)
@@ -36,8 +37,19 @@ function NextQuestion({ questionNumber }: { questionNumber: number }) {
 		changeState('submittingAnswer')
 		try {
 			submitAnswer(questionNumber, answer).then((res) => {
+				if (!res) {
+					changeState('idle')
+					return alert('Ошибка при проверке ответа')
+				}
+
 				changeState('afterSubmit')
-				setCorrectAnswer(res?.correctAnswerNumber)
+
+				if ('correctAnswerNumber' in res) {
+					setCorrectAnswer(res.correctAnswerNumber)
+				}
+				if ('correctAnswerNumbers' in res) {
+					setCorrectAnswer(res.correctAnswerNumbers)
+				}
 
 				if (hasMore) {
 					localStorage.setItem(
@@ -58,6 +70,12 @@ function NextQuestion({ questionNumber }: { questionNumber: number }) {
 				<SingleOption
 					data={loadedQuestionData.data}
 					correctAnswer={correctAnswer}
+				/>
+			) : null}
+			{loadedQuestionData.data.type === 'selectMultiple' ? (
+				<MultipleOptions
+					data={loadedQuestionData.data}
+					correctAnswers={correctAnswer}
 				/>
 			) : null}
 			<button
