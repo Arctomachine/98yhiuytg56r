@@ -25,6 +25,9 @@ type CorrectMultiple = {
 type CorrectTextShort = {
 	correctAnswerText: string
 }
+type CorrectTextLong = {
+	correctAnswerText: string
+}
 export async function submitAnswer(questionNumber: number) {
 	const question = questions[questionNumber - 1]
 
@@ -44,6 +47,13 @@ export async function submitAnswer(questionNumber: number) {
 
 	if (question.type === 'inputShort') {
 		const data: CorrectTextShort = {
+			correctAnswerText: question.expectedAnswer,
+		}
+		return data
+	}
+
+	if (question.type === 'inputLong') {
+		const data: CorrectTextLong = {
 			correctAnswerText: question.expectedAnswer,
 		}
 		return data

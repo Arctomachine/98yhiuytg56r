@@ -4,6 +4,7 @@ import { loadOneQuestion, submitAnswer } from '../utils/QuestionsHandler.ts'
 import { SingleOption } from './SingleOption.tsx'
 import { MultipleOptions } from './MultipleOptions.tsx'
 import { ShortText } from './ShortText.tsx'
+import { LongText } from './LongText.tsx'
 
 function NextQuestion({ questionNumber }: { questionNumber: number }) {
 	const currentState = useQuestionStore((state) => state.currentState)
@@ -84,6 +85,12 @@ function NextQuestion({ questionNumber }: { questionNumber: number }) {
 			) : null}
 			{loadedQuestionData.data.type === 'inputShort' ? (
 				<ShortText
+					data={loadedQuestionData.data}
+					correctAnswer={correctAnswer}
+				/>
+			) : null}
+			{loadedQuestionData.data.type === 'inputLong' ? (
+				<LongText
 					data={loadedQuestionData.data}
 					correctAnswer={correctAnswer}
 				/>
