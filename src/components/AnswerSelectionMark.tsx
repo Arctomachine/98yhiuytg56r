@@ -1,6 +1,6 @@
 import useQuestionStore from '../stores/questionStore.ts'
 
-export function AnswerMark({
+export function AnswerSelectionMark({
 	correctAnswer,
 	index,
 }: {
@@ -11,6 +11,6 @@ export function AnswerMark({
 	const correctAnswerArray = correctAnswer.split(',')
 
 	if (correctAnswerArray.includes(index.toString())) return <>✅</>
-	if (answer && answer.split(',').includes(index.toString())) return <>❌</>
+	if (answer?.split(',').includes(index.toString())) return <>❌</>
 	return null
 }

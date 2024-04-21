@@ -1,6 +1,6 @@
 import type { SelectSingle } from '../data/questions.ts'
 import useQuestionStore from '../stores/questionStore.ts'
-import { AnswerMark } from './AnswerMark.tsx'
+import { AnswerSelectionMark } from './AnswerSelectionMark.tsx'
 
 export function SingleOption({
 	data,
@@ -31,7 +31,10 @@ export function SingleOption({
 							{option}
 						</label>
 						{currentState === 'afterSubmit' && correctAnswer ? (
-							<AnswerMark correctAnswer={correctAnswer} index={index} />
+							<AnswerSelectionMark
+								correctAnswer={correctAnswer}
+								index={index}
+							/>
 						) : null}
 					</div>
 				))}

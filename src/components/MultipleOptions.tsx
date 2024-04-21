@@ -1,7 +1,7 @@
-import { SelectMultiple } from '../data/questions.ts'
+import { type ChangeEvent, useState } from 'react'
+import type { SelectMultiple } from '../data/questions.ts'
 import useQuestionStore from '../stores/questionStore.ts'
-import { ChangeEvent, useState } from 'react'
-import { AnswerMark } from './AnswerMark.tsx'
+import { AnswerSelectionMark } from './AnswerSelectionMark.tsx'
 
 export function MultipleOptions(props: {
 	data: SelectMultiple
@@ -40,7 +40,10 @@ export function MultipleOptions(props: {
 							{option}
 						</label>
 						{currentState === 'afterSubmit' && props.correctAnswers ? (
-							<AnswerMark correctAnswer={props.correctAnswers} index={index} />
+							<AnswerSelectionMark
+								correctAnswer={props.correctAnswers}
+								index={index}
+							/>
 						) : null}
 					</div>
 				))}

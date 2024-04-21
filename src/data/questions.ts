@@ -45,11 +45,11 @@ const questions: Question[] = [
 		],
 		answerNumbers: [0, 1],
 	},
-	// {
-	// 	type: 'inputShort',
-	// 	question: btoa(Date.now().toString()),
-	// 	expectedAnswer: '12345',
-	// },
+	{
+		type: 'inputShort',
+		question: btoa(Date.now().toString()),
+		expectedAnswer: '12345',
+	},
 	// {
 	// 	type: 'inputLong',
 	// 	question: btoa(Date.now().toString()),

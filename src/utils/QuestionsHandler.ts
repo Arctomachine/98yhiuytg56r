@@ -16,18 +16,36 @@ export async function loadOneQuestion(questionNumber: number) {
 	}
 }
 
-export async function submitAnswer(questionNumber: number, answer: string) {
+type CorrectSingle = {
+	correctAnswerNumber: string
+}
+type CorrectMultiple = {
+	correctAnswerNumbers: string
+}
+type CorrectTextShort = {
+	correctAnswerText: string
+}
+export async function submitAnswer(questionNumber: number) {
 	const question = questions[questionNumber - 1]
 
 	if (question.type === 'selectSingle') {
-		return {
+		const data: CorrectSingle = {
 			correctAnswerNumber: question.answerNumber.toString(),
 		}
+		return data
 	}
 
 	if (question.type === 'selectMultiple') {
-		return {
+		const data: CorrectMultiple = {
 			correctAnswerNumbers: question.answerNumbers.join(','),
 		}
+		return data
+	}
+
+	if (question.type === 'inputShort') {
+		const data: CorrectTextShort = {
+			correctAnswerText: question.expectedAnswer,
+		}
+		return data
 	}
 }

@@ -3,6 +3,7 @@ import useQuestionStore from '../stores/questionStore.ts'
 import { loadOneQuestion, submitAnswer } from '../utils/QuestionsHandler.ts'
 import { SingleOption } from './SingleOption.tsx'
 import { MultipleOptions } from './MultipleOptions.tsx'
+import { ShortText } from './ShortText.tsx'
 
 function NextQuestion({ questionNumber }: { questionNumber: number }) {
 	const currentState = useQuestionStore((state) => state.currentState)
@@ -36,7 +37,7 @@ function NextQuestion({ questionNumber }: { questionNumber: number }) {
 		}
 		changeState('submittingAnswer')
 		try {
-			submitAnswer(questionNumber, answer).then((res) => {
+			submitAnswer(questionNumber).then((res) => {
 				if (!res) {
 					changeState('idle')
 					return alert('Ошибка при проверке ответа')
@@ -49,6 +50,9 @@ function NextQuestion({ questionNumber }: { questionNumber: number }) {
 				}
 				if ('correctAnswerNumbers' in res) {
 					setCorrectAnswer(res.correctAnswerNumbers)
+				}
+				if ('correctAnswerText' in res) {
+					setCorrectAnswer(res.correctAnswerText)
 				}
 
 				if (hasMore) {
@@ -76,6 +80,12 @@ function NextQuestion({ questionNumber }: { questionNumber: number }) {
 				<MultipleOptions
 					data={loadedQuestionData.data}
 					correctAnswers={correctAnswer}
+				/>
+			) : null}
+			{loadedQuestionData.data.type === 'inputShort' ? (
+				<ShortText
+					data={loadedQuestionData.data}
+					correctAnswer={correctAnswer}
 				/>
 			) : null}
 			<button
