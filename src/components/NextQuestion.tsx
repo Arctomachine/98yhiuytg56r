@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import useQuestionStore from '../stores/questionStore.ts'
 import { loadOneQuestion, submitAnswer } from '../utils/QuestionsHandler.ts'
-import { SingleOption } from './SingleOption.tsx'
+import { LongText } from './LongText.tsx'
 import { MultipleOptions } from './MultipleOptions.tsx'
 import { ShortText } from './ShortText.tsx'
-import { LongText } from './LongText.tsx'
+import { SingleOption } from './SingleOption.tsx'
 
 function NextQuestion({ questionNumber }: { questionNumber: number }) {
 	const currentState = useQuestionStore((state) => state.currentState)
@@ -56,12 +56,10 @@ function NextQuestion({ questionNumber }: { questionNumber: number }) {
 					setCorrectAnswer(res.correctAnswerText)
 				}
 
-				if (hasMore) {
-					localStorage.setItem(
-						'currentQuestionNumber',
-						String(questionNumber + 1),
-					)
-				}
+				localStorage.setItem(
+					'currentQuestionNumber',
+					String(questionNumber + 1),
+				)
 			})
 		} catch (err) {
 			changeState('idle')
@@ -109,6 +107,11 @@ function NextQuestion({ questionNumber }: { questionNumber: number }) {
 			{hasMore && currentState === 'afterSubmit' ? (
 				<button type="button" onClick={goToNextQuestion}>
 					Следующий вопрос
+				</button>
+			) : null}
+			{!hasMore && currentState === 'afterSubmit' ? (
+				<button type="button" onClick={goToNextQuestion}>
+					Завершить тестирование
 				</button>
 			) : null}
 		</div>

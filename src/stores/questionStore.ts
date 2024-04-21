@@ -10,6 +10,7 @@ type QuestionStore = {
 	changeState: (newState: QuestionStore['currentState']) => void
 	currentQuestionNumber: number
 	goToNextQuestion: () => void
+	resetProgress: () => void
 	currentAnswer?: string
 	setAnswer: (newAnswer: string) => void
 }
@@ -24,6 +25,11 @@ const useQuestionStore = create<QuestionStore>()((set) => ({
 			currentState: 'initial',
 			currentAnswer: undefined,
 		})),
+	resetProgress: () =>
+		set(() => {
+			localStorage.setItem('currentQuestionNumber', String(0))
+			return { currentQuestionNumber: 0 }
+		}),
 	currentAnswer: undefined,
 	setAnswer: (newAnswer: string) => set(() => ({ currentAnswer: newAnswer })),
 }))

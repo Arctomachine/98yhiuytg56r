@@ -1,5 +1,11 @@
 import questions from '../data/questions.ts'
 
+export async function getQuestionsListLength() {
+	return {
+		length: questions.length,
+	}
+}
+
 export async function loadOneQuestion(questionNumber: number) {
 	if (!questionNumber) {
 		throw new Error('questionNumber is required')
