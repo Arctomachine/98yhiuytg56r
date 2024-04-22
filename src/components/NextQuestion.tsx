@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import useQuestionStore from '../stores/questionStore.ts'
+import useTimerStore from '../stores/timerStore.ts'
 import { loadOneQuestion, submitAnswer } from '../utils/QuestionsHandler.ts'
 import { LongText } from './LongText.tsx'
 import { MultipleOptions } from './MultipleOptions.tsx'
@@ -18,6 +19,7 @@ function NextQuestion({ questionNumber }: { questionNumber: number }) {
 	const [correctAnswer, setCorrectAnswer] = useState<string | undefined>(
 		undefined,
 	)
+	const stopTimer = useTimerStore((state) => state.stop)
 
 	useEffect(() => {
 		changeState('loadingQuestion')
@@ -60,6 +62,10 @@ function NextQuestion({ questionNumber }: { questionNumber: number }) {
 					'currentQuestionNumber',
 					String(questionNumber + 1),
 				)
+
+				if (!hasMore) {
+					stopTimer()
+				}
 			})
 		} catch (err) {
 			changeState('idle')

@@ -9,6 +9,7 @@ type QuestionStore = {
 		| 'afterSubmit'
 	changeState: (newState: QuestionStore['currentState']) => void
 	currentQuestionNumber: number
+	setCurrentQuestionNumber: (newQuestion: number) => void
 	goToNextQuestion: () => void
 	resetProgress: () => void
 	currentAnswer?: string
@@ -19,6 +20,8 @@ const useQuestionStore = create<QuestionStore>()((set) => ({
 	currentState: 'initial',
 	changeState: (newState) => set(() => ({ currentState: newState })),
 	currentQuestionNumber: Number(localStorage.getItem('currentQuestionNumber')),
+	setCurrentQuestionNumber: (newQuestion: number) =>
+		set(() => ({ currentQuestionNumber: newQuestion })),
 	goToNextQuestion: () =>
 		set((state) => ({
 			currentQuestionNumber: state.currentQuestionNumber + 1,

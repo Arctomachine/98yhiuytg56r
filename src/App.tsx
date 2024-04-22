@@ -3,7 +3,9 @@ import './App.css'
 import FirstScreen from './components/FirstScreen.tsx'
 import LastScreen from './components/LastScreen.tsx'
 import NextQuestion from './components/NextQuestion.tsx'
+import Timer from './components/Timer.tsx'
 import useQuestionStore from './stores/questionStore.ts'
+import useTimerStore from './stores/timerStore.ts'
 import { getQuestionsListLength } from './utils/QuestionsHandler.ts'
 
 function App() {
@@ -11,6 +13,26 @@ function App() {
 	const currentQuestionNumber = useQuestionStore(
 		(state) => state.currentQuestionNumber,
 	)
+	const setCurrentQuestionNumber = useQuestionStore(
+		(state) => state.setCurrentQuestionNumber,
+	)
+
+	const currentTime = useTimerStore((state) => state.currentTime)
+	const endTime = useTimerStore((state) => state.endTime)
+	const resetTimer = useTimerStore((state) => state.reset)
+
+	useEffect(() => {
+		if (endTime > 0 && currentTime > endTime) {
+			setCurrentQuestionNumber(totalQuestions + 1)
+			resetTimer()
+		}
+	}, [
+		currentTime,
+		endTime,
+		setCurrentQuestionNumber,
+		totalQuestions,
+		resetTimer,
+	])
 
 	useEffect(() => {
 		try {
@@ -47,6 +69,7 @@ function App() {
 
 	return (
 		<div className="container">
+			<Timer />
 			<NextQuestion questionNumber={currentQuestionNumber} />
 		</div>
 	)
