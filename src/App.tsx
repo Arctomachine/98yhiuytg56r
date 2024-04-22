@@ -71,6 +71,9 @@ function App() {
 		<div className="container">
 			<Timer />
 			<NextQuestion questionNumber={currentQuestionNumber} />
+			<div>
+				Вопрос {currentQuestionNumber} из {totalQuestions}
+			</div>
 		</div>
 	)
 }
