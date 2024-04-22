@@ -12,10 +12,14 @@ type TimerStore = {
 }
 
 const useTimerStore = create<TimerStore>()((set) => ({
-	enabled: false,
+	enabled: Number(localStorage.getItem('endTime')) > 0,
 	currentTime: Number(localStorage.getItem('currentTime')) || 0,
 	endTime: Number(localStorage.getItem('endTime')) || 0,
-	setEndTime: (time: number) => set(() => ({ endTime: time || 0 })),
+	setEndTime: (time: number) =>
+		set(() => {
+			localStorage.setItem('endTime', String(time || 0))
+			return { endTime: time || 0 }
+		}),
 	start: () => set((state) => ({ enabled: state.endTime > 0 })),
 	stop: () => set(() => ({ enabled: false })),
 	reset: () =>

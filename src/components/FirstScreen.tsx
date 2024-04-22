@@ -31,7 +31,9 @@ function FirstScreen() {
 					id={inputTimeLimitId}
 					onChange={(event) =>
 						// -1 милисекунда на результат не повлияет, но помогает убрать перескок таймера сразу после старта
-						setTimerGoal(Number(event.target.value) * 1000 * 60 - 1)
+						setTimerGoal(
+							Math.max(Number(event.target.value) * 1000 * 60 - 1, 0),
+						)
 					}
 				/>
 			</div>
