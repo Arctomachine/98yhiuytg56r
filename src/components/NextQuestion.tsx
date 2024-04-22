@@ -23,6 +23,7 @@ function NextQuestion({ questionNumber }: { questionNumber: number }) {
 
 	useEffect(() => {
 		changeState('loadingQuestion')
+		// todo добавить обработку ошибок
 		loadOneQuestion(questionNumber).then((res) => {
 			setLoadedQuestionData(res)
 			setHasMore(res.hasMore)
@@ -41,6 +42,7 @@ function NextQuestion({ questionNumber }: { questionNumber: number }) {
 		changeState('submittingAnswer')
 		try {
 			submitAnswer(questionNumber).then((res) => {
+				// todo обрабатывать ошибки детальнее
 				if (!res) {
 					changeState('idle')
 					return alert('Ошибка при проверке ответа')

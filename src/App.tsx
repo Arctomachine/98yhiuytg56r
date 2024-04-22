@@ -36,6 +36,7 @@ function App() {
 
 	useEffect(() => {
 		try {
+			// todo обрабатывать ошибки детальнее
 			getQuestionsListLength().then((res) => {
 				setTotalQuestions(res.length)
 			})

@@ -64,4 +64,6 @@ export async function submitAnswer(questionNumber: number) {
 		}
 		return data
 	}
+
+	// todo обработать запрос несуществубщего вопроса или неправильного типа
 }
